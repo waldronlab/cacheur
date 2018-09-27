@@ -1,0 +1,18 @@
+Package: cacheur
+Title: Cache files downloaded from S3
+Version: 0.0.0.9000
+Authors@R: person("Marcel", "Ramos", email = "marcel.ramos@roswellpark.org",
+    role = c("aut", "cre"))
+Description: Cacheur takes files from S3 or URLs and manages them via
+    BiocFileCache
+Depends:
+    R (>= 3.5.0),
+    BiocFileCache
+Imports:
+    aws.s3
+License: Artistic-2.0
+BugReports: https://github.com/waldronlab/cacheur/issues
+VignetteBuilder: knitr
+biocViews: DataImport, Software
+RoxygenNote: 6.0.1
+
