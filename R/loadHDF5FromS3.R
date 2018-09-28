@@ -32,17 +32,18 @@
         bfcrpath(bfc, paste0(rname, ".rds")))
 }
 
-.manage_local_file <- function(dataname, infolder) {
+.manage_local_file <- function(datafolder) {
     bfc <- .get_cache()
+    dataname <- basename(datafolder)
     rids <- bfcquery(bfc, dataname, "rname")$rid
-    if (!length(rid))
+    if (!length(rids))
         stop("Can't update non-existing cache item(s)")
 
     cachedir <- bfccache(bfc)
     fnames <- paste0(gsub("file", "", basename(tempfile())), "_",
         dataname, "_", c("assays.h5", "se.rds"))
     fileLoc <- file.path(cachedir, fnames)
-    inpaths <- file.path(infolder, dataname, c("assays.h5", "se.rds"))
+    inpaths <- file.path(datafolder, c("assays.h5", "se.rds"))
     file.copy(inpaths, fileLoc)
 
     suppressWarnings(
@@ -73,8 +74,8 @@
     if (!.files_exist(bfc, dataname) || force) {
         if (verbose)
             message("Downloading data for: ", dataname)
-            dlfolder <- .download_from_s3(bucket = bucket, dataname = dataname)
-            .manage_local_file(dataname, dlfolder)
+            dfolder <- .download_from_s3(bucket = bucket, dataname = dataname)
+            .manage_local_file(dfolder)
     } else
         message("Data in cache: ", dataname)
 
