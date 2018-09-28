@@ -50,7 +50,7 @@
         bfcupdate(bfc, rids = rids, rpath = fileLoc)
     )
 
-    unlink(unique(dirname(inpaths)), recursive = TRUE)
+    unlink(datafolder, recursive = TRUE)
 
     bfcrpath(bfc, rids = rids)
 }
