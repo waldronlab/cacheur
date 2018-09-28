@@ -15,7 +15,7 @@
         )
     }
 
-    normalizePath(location)
+    normalizePath(local_dir)
 }
 
 .get_cache <- function() {
