@@ -1,19 +1,20 @@
-.download_from_s3 <- function(bucket, dataname, location = ".")
+.download_from_s3 <-
+    function(bucket = "multiassayexperiments", dataname, location = ".")
 {
     STD_FILES <- c("se.rds", "assays.h5")
 
-    if (!dir.exists(dataname))
-        dir.create(dataname)
+    local_dir <- file.path(location, dataname)
+    if (!dir.exists(local_dir))
+        dir.create(local_dir)
 
     for (i in STD_FILES) {
-
         aws.s3::save_object(
             object = file.path(dataname, i),
-            bucket = "multiassayexperiments",
-            file = file.path(dataname, location, i)
+            bucket = bucket,
+            file = file.path(local_dir, i)
         )
-
     }
+
     normalizePath(location)
 }
 
