@@ -11,8 +11,10 @@ Depends:
 Imports:
     aws.s3,
     HDF5Array,
+    knitr,
     rappdirs,
-    S4Vectors
+    S4Vectors,
+    stats
 License: Artistic-2.0
 BugReports: https://github.com/waldronlab/cacheur/issues
 VignetteBuilder: knitr

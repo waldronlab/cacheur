@@ -96,7 +96,7 @@ setCache <-
     if (!length(rids)) {
         file1 <- file.path("s3:/", bucket, dataname, "assays.h5")
         file2 <- file.path("s3:/", bucket, dataname, "se.rds")
-        rids <- setNames(c(
+        rids <- stats::setNames(c(
         names(bfcadd(bfc, paste0(dataname, ".h5"), file1, rtype = "web",
             download = FALSE)),
         names(bfcadd(bfc, paste0(dataname, ".rds"), file2, rtype = "web",
