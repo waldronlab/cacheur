@@ -18,12 +18,36 @@
     normalizePath(local_dir)
 }
 
+setCache <-
+    function(directory = rappdirs::user_cache_dir("cacheur"), verbose = TRUE,
+             ask = interactive())
+{
+    stopifnot(is.character(directory),
+        isSingleString(directory), !is.na(directory))
+
+    if (!dir.exists(directory)) {
+        if (ask) {
+            qtxt <- sprintf(
+                "Create cacheur cache at \n    %s? [y/n]: ",
+                directory
+            )
+            answer <- .getAnswer(qtxt, allowed = c("y", "Y", "n", "N"))
+            if ("n" == answer)
+                stop("'cacheur_cache' directory not created. Use 'setCache'")
+        }
+        dir.create(directory, recursive = TRUE, showWarnings = FALSE)
+    }
+    options("cacheur_cache" = directory)
+
+    if (verbose)
+        message("cacheur cache directory set to:\n    ", directory)
+    invisible(directory)
+}
+
 .get_cache <- function() {
     cache <- getOption("s3cache",
-        MultiAssayExperimentData::setCache(
-            directory = rappdirs::user_cache_dir("cacheur")
-    ))
-
+        setCache(directory = rappdirs::user_cache_dir("cacheur"))
+    )
     BiocFileCache::BiocFileCache(cache)
 }
 
