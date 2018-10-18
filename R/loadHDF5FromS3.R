@@ -64,9 +64,13 @@ setCache <-
         stop("Can't update non-existing cache item(s)")
 
     cachedir <- bfccache(bfc)
-    fnames <- paste0(gsub("file", "", basename(tempfile())), "_",
-        dataname, "_", c("assays.h5", "se.rds"))
-    fileLoc <- file.path(cachedir, fnames)
+    foldername <- paste0(gsub("file", "", basename(tempfile())), "_",
+        dataname)
+    fnames <- c("assays.h5", "se.rds")
+    datacache <- file.path(cachedir, foldername)
+    fileLoc <- file.path(datacache, fnames)
+    if (!dir.exists(datacache))
+        dir.create(datacache)
     inpaths <- file.path(datafolder, c("assays.h5", "se.rds"))
     file.copy(inpaths, fileLoc)
 
