@@ -110,3 +110,14 @@ setCache <-
     bfcrpath(bfc, rids = rids)
 }
 
+#' @export loadDelayedSEFromS3
+loadDelayedSEFromS3 <-
+    function(bucket = "multiassayexperiments", dataname = "example",
+        verbose = FALSE, force = FALSE)
+{
+    paths <- .add_from_bucket(bucket = bucket, dataname = dataname,
+        verbose = verbose, force = force)
+    path <- unique(dirname(paths))
+    stopifnot(S4Vectors::isSingleString(path))
+    HDF5Array::loadHDF5SummarizedExperiment(path)
+}
