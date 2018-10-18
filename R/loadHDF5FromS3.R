@@ -1,3 +1,7 @@
+#' @importFrom BiocFileCache BiocFileCache bfcrpath bfcquery bfccache bfcupdate
+#' bfcadd
+NULL
+
 .download_from_s3 <-
     function(bucket = "multiassayexperiments", dataname, location = ".")
 {
@@ -22,8 +26,8 @@ setCache <-
     function(directory = rappdirs::user_cache_dir("cacheur"), verbose = TRUE,
              ask = interactive())
 {
-    stopifnot(is.character(directory),
-        isSingleString(directory), !is.na(directory))
+    stopifnot(is.character(directory), S4Vectors::isSingleString(directory),
+        !is.na(directory))
 
     if (!dir.exists(directory)) {
         if (ask) {
@@ -109,7 +113,19 @@ setCache <-
 
     bfcrpath(bfc, rids = rids)
 }
-
+#' Pull HDF5Array files from the associated S3 bucket
+#'
+#' This function downloads and caches data from an Amazon S3 bucket and
+#' loads it as a SummarizedExperiment with an HDF5Array
+#'
+#' @param bucket A string indicating the S3 bucket name
+#' @param dataname The name of the folder as part of the bucket path
+#' @param verbose logical (default FALSE) whether to report procedural steps
+#' during download and load
+#' @param force logical (default FALSE) whether to re-download and force load
+#' resources from S3
+#'
+#'
 #' @export loadDelayedSEFromS3
 loadDelayedSEFromS3 <-
     function(bucket = "multiassayexperiments", dataname = "example",
