@@ -1,22 +1,21 @@
 Package: cacheur
+Type: Package
 Title: Cache files downloaded from S3
-Version: 0.0.1
+Version: 0.0.2
 Authors@R: person("Marcel", "Ramos", email = "marcel.ramos@roswellpark.org",
     role = c("aut", "cre"))
-Description: Cacheur takes files from S3 or URLs and manages them via
-    BiocFileCache
+Description: cacheur makes it easy to set up package caching mechanisms for
+    developers.
 Depends:
     R (>= 3.5.0),
     BiocFileCache
 Imports:
-    aws.s3,
-    HDF5Array,
-    knitr,
     rappdirs,
     S4Vectors,
     stats
+Suggests: knitr
 License: Artistic-2.0
 BugReports: https://github.com/waldronlab/cacheur/issues
 VignetteBuilder: knitr
 biocViews: DataImport, Software
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1

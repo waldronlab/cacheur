@@ -1,3 +1,4 @@
+## helpers from BiocManager
 .getAnswer <- function(msg, allowed)
 {
     if (interactive()) {
@@ -13,7 +14,16 @@
     }
 }
 
-.msg <- function(fmt, ..., width = getOption("width")) {
+.msg <-
+    function(fmt, ..., width = getOption("width"))
+{
     txt <- strwrap(sprintf(fmt, ...), width = width, exdent = 2)
     paste(txt, collapse = "\n")
+}
+
+.message <-
+    function(..., appendLF=TRUE)
+{
+    message(.msg(...), appendLF=appendLF)
+    invisible(TRUE)
 }
